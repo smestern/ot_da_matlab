@@ -1,0 +1,30 @@
+% Open optimal transport library 
+reg_space =logspace(1e-5,10)
+%load the data
+x = rand(2,N)-.5;
+theta = 2*pi*rand(1,N);
+r = .8 + .2*rand(1,N);
+y = [cos(theta).*r; sin(theta).*r];
+
+%visualize
+subplot(1,2,1)
+hold on
+plotp = @(x,col)plot(x(1,:)', x(2,:)', 'o', 'MarkerSize', 10, 'MarkerEdgeColor', 'k', 'MarkerFaceColor', col, 'LineWidth', 2);
+plotp(x, 'b');
+plotp(y, 'r');
+axis('off'); axis('equal');
+
+out_sample = sinkhornDa(x', y', 1e-2)
+for x = reg_space
+    subplot(1,2,2)
+    hold on
+    plotp = @(x,col)plot(x(1,:)', x(2,:)', 'o', 'MarkerSize', 10, 'MarkerEdgeColor', 'k', 'MarkerFaceColor', col, 'LineWidth', 2);
+    plotp(y, 'r');
+    plotp(out_sample', 'b');
+
+    axis('off'); axis('equal');
+
+
+
+
+
